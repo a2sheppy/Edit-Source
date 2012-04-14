@@ -1,0 +1,8 @@
+content source-editor chrome/content/
+
+# Firefox
+overlay	chrome://browser/content/browser.xul chrome://source-editor/content/button.xul
+
+# Locales
+
+locale source-editor en-US chrome/locale/en-US/

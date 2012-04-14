@@ -1,0 +1,20 @@
+<!ENTITY editor_window_title "Loading Source Editor">
+
+<!ENTITY editor_accel_save "S">
+<!ENTITY editor_accel_close "W">
+<!ENTITY editor_accel_update_page "R">
+
+<!ENTITY editor_accel_file "F">
+<!ENTITY editor_accel_edit "E">
+
+<!ENTITY editor_menu_title_file "File">
+<!ENTITY editor_menu_item_save_as "Save as...">
+<!ENTITY editor_menu_item_close "Close">
+<!ENTITY editor_menu_item_update_page "Update Page">
+
+<!ENTITY editor_menu_title_edit "Edit">
+<!ENTITY editor_menu_item_highlighting "Syntax Highlighting">
+<!ENTITY editor_menu_item_text "Text">
+
+<!ENTITY editor_status_label_position "Position:">
+<!ENTITY editor_status_label_size "Lines / Chars:">

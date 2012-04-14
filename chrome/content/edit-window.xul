@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!-- Include XUL for edit menu items -->
+<?xul-overlay href="chrome://global/content/editMenuOverlay.xul"?>
+<?xul-overlay href="chrome://browser/content/source-editor-overlay.xul"?>
+
+<!DOCTYPE window SYSTEM "chrome://source-editor/locale/edit-window.dtd">
+    
+<window
+    id="edit-window"
+    title="&editor_window_title;"
+    width="600"
+    height="400"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    
+    <!-- Include script for Edit menu commands -->
+    <script type="application/javascript"
+          src="chrome://global/content/globalOverlay.js"/>
+
+    <stringbundleset id="stringbundleset">
+      <stringbundle id="editor-strings"
+            src="chrome://source-editor/locale/edit-window.properties"/>
+    </stringbundleset>
+    
+    <toolbox>
+      <keyset>
+        <key id="save-key" modifiers="accel" key="&editor_accel_save;"
+              oncommand="window.sourceEditor.save(window)"/>
+        <key id="close-key" modifiers="accel" key="&editor_accel_close;"
+              oncommand="window.close()"/>
+        <key id="update-page-key" modifiers="accel"
+              key="&editor_accel_update_page;"
+              oncommand="window.sourceEditor.updatePage(window)"/>
+      </keyset>
+      
+      <commandset id="editMenuCommands"/>
+      <commandset id="sourceEditorCommands"/>
+      
+      <keyset id="sourceEditorKeys"/>
+      
+      <!-- Build the menu bar -->
+      <menubar id="source-editor-menubar">
+        <menu id="file-menu" label="&editor_menu_title_file;"
+              accesskey="&editor_accel_file;">
+          <menupopup id="file-popup">
+            <menuitem label="&editor_menu_item_save_as;"
+                  accesskey="&editor_accel_save;" key="save-key"
+                  oncommand="window.sourceEditor.save(window)"/>
+            <menuitem label="&editor_menu_item_close;"
+                  accesskey="&editor_accel_close;" key="close-key"
+                  oncommand="window.close()"/>
+            <menuseparator/>
+            <menuitem label="&editor_menu_item_update_page;"
+                  accesskey="&editor_accel_update_page;"
+                  key="update-page-key" id="update-page"
+                  oncommand="window.sourceEditor.updatePage(window)"/>
+          </menupopup>
+        </menu>
+        
+        <!-- Note the Edit menu uses stuff from browser XUL -->
+        <menu id="edit-menu" label="&editor_menu_title_edit;"
+              accesskey="&editor_accel_edit;">
+          <menupopup onpopupshowing="goUpdateSourceEditorMenuItems()">
+            <menuitem id="se-menu-undo"/>
+            <menuitem id="se-menu-redo"/>
+            <menuseparator/>
+            <menuitem id="se-menu-cut"/>
+            <menuitem id="se-menu-copy"/>
+            <menuitem id="se-menu-paste"/>
+            <menuseparator/>
+            <menuitem id="se-menu-selectAll"/>
+            <menuseparator/>
+            <menuitem id="se-menu-find"/>
+            <menuitem id="se-menu-findAgain"/>
+            <menuseparator/>
+            <menuitem id="se-menu-gotoLine"/>
+            <menuseparator/>
+            <menu id="syntax-menu" label="&editor_menu_item_highlighting;">
+            <menupopup id="syntax-popup">
+              <menuitem id="txt-mode" label="&editor_menu_item_text;"
+                    name="syntax" type="radio"
+                    oncommand="window.sourceEditor.setSyntax(window, 'txt')"/>
+              <menuitem id="html-mode" label="HTML" name="syntax" type="radio"
+                    oncommand="window.sourceEditor.setSyntax(window, 'html')"/>
+              <menuitem id="js-mode" label="JavaScript" name="syntax"
+                    type="radio"
+                    oncommand="window.sourceEditor.setSyntax(window, 'js')"/>
+              <menuitem id="css-mode" label="CSS" name="syntax" type="radio"
+                    oncommand="window.sourceEditor.setSyntax(window, 'css')"/>
+              <menuitem id="xml-mode" label="XML" name="syntax" type="radio"
+                    oncommand="window.sourceEditor.setSyntax(window, 'xml')"/>
+            </menupopup>
+            </menu>
+          </menupopup>
+        </menu>
+      </menubar>
+    </toolbox>
+    
+    <!-- The context menu -->
+    <popupset id="source-editor-popups">
+      <menupopup id="sourceEditorContextMenu"
+              onpopupshowing="goUpdateSourceEditorMenuItems()">
+        <menuitem id="se-cMenu-undo"/>
+        <menuseparator/>
+        <menuitem id="se-cMenu-cut"/>
+        <menuitem id="se-cMenu-copy"/>
+        <menuitem id="se-cMenu-paste"/>
+        <menuitem id="se-cMenu-delete"/>
+        <menuseparator/>
+        <menuitem id="se-cMenu-selectAll"/>
+        <menuseparator/>
+        <menuitem id="se-cMenu-find"/>
+        <menuitem id="se-cMenu-findAgain"/>
+        <menuseparator/>
+        <menuitem id="se-cMenu-gotoLine"/>
+        <menuseparator/>
+        <menuitem id="cUpdate-page" label="&editor_menu_item_update_page;"
+              oncommand="window.sourceEditor.updatePage(window)"/>
+      </menupopup>
+    </popupset>
+
+    <!-- The box that will contain the editor -->
+    <hbox id="editbox" flex="1" />
+    
+    <!-- The box for the status bar at the bottom of the window -->
+    <hbox id="infobox" height="16">
+      <label value="&editor_status_label_position;"/>
+      <label value="0, 0" id="position"/>
+      <spacer flex="1"/>
+      <label value="" id="unsaved"/>
+      <spacer flex="1"/>
+      <label value="&editor_status_label_size;"/>
+      <label value="0 / 0" id="size"/>
+    </hbox>
+</window>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description
+    about="urn:mozilla:install-manifest"
+
+    em:name="Source Editor Example"
+    em:description="Example of using the Source Editor API"
+    em:creator="Eric Shepherd"
+
+    em:id="source-editor@example.com"
+    em:version="1.0"
+
+    em:iconURL="chrome://source-editor/content/icon.png" >
+
+    <em:targetApplication><!-- Firefox -->
+      <Description
+        em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+        em:minVersion="13.0a1"
+        em:maxVersion="16" />
+    </em:targetApplication>
+
+    <em:file>
+      <Description
+        about="urn:mozilla:extension:source-editor"
+        em:package="content/source-editor/" />
+    </em:file>
+
+  </Description>
+
+</RDF>

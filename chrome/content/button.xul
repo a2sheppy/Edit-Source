@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://source-editor/locale/button.dtd">
+
+<overlay id="source-editor-overlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script type="application/x-javascript"
+  src="chrome://source-editor/content/button.js"/>
+
+<popup id="contentAreaContextMenu">
+  <menuitem id="edit-source_menuitem"
+            oncommand="sourceEditorExample.openInEditor('link');"
+            label="&context_title_open_link;" />
+  <menuitem id="edit-source_menuitem_thispage"
+            oncommand="sourceEditorExample.openInEditor('page');"
+            label="&context_title_open_page;" />
+</popup>
+
+<!-- Insert into the Tools->Web Developer submenu -->
+
+<menupopup id="menuWebDeveloperPopup">
+  <menuitem id="edit-source-webdev-item" label="&edit_page;"
+            insertbefore="devToolsEndSeparator"
+            oncommand="sourceEditorExample.openInEditor('page');" />
+</menupopup>
+
+<!-- Insert into the app button menu -->
+
+<menupopup id="appmenu_webDeveloper_popup">
+  <menuitem id="edit-source-appmenu-item" label="&edit_page;"
+            insertafter="appmenu_pageInspect"
+            oncommand="sourceEditorExample.openInEditor('page');" />
+</menupopup>
+
+</overlay>
