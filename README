@@ -1,0 +1,7 @@
+Edit Source extension for Firefox 13+
+
+This extension adds an Edit Source feature to Firefox. If you right click on a document that is a known editable text document (or a link to one), you get the option to edit that content. The new built-in source-editor module is used to present the document for editing.
+
+While editing, you can right-click in the document editor and choose the "Update Page" option, which is also available in the Edit menu and with the Ctrl-R/Cmd-R shortcut, to refresh the original document with the changes you've made in the editor.
+
+You can save your changes to your local computer using the Save option in the File menu.
