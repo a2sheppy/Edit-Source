@@ -54,7 +54,7 @@ var sourceEditorExample = {
       // See if the content is editable and adjust menus accordingly
       
       var webDevItem = document.getElementById("edit-source-webdev-item");
-      var fxItem = document.getElementById("
+      var fxItem = document.getElementById("edit-source-appmenu-item");
       
       if (sourceEditorExample.getType(document.contentType)) {
         webDevItem.disabled = false;
