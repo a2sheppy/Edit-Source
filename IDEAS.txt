@@ -1,0 +1,6 @@
+Ideas for improvements to the Edit Source extension:
+
+* Add block highlighting.
+* Add code folding.
+* Add an HTML/CSS/JS tidy feature. This could be done using the HTMLTidy library.
+* Add support for viewing the rendered output of opened-from linked articles by opening a new tab or window for them.

@@ -5,3 +5,5 @@ This extension adds an Edit Source feature to Firefox. If you right click on a d
 While editing, you can right-click in the document editor and choose the "Update Page" option, which is also available in the Edit menu and with the Ctrl-R/Cmd-R shortcut, to refresh the original document with the changes you've made in the editor.
 
 You can save your changes to your local computer using the Save option in the File menu.
+
+Neat trick: if you open the editor while viewing about:blank, you can compose fresh HTML from scratch and experiment with it!

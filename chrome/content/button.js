@@ -39,24 +39,37 @@
 var sourceEditorExample = {
   // Called at startup to initialize the extension
   startup: function() {
-	  if (document.getElementById("contentAreaContextMenu")) {
+    if (document.getElementById("contentAreaContextMenu")) {
       Components.utils.import("resource:///modules/source-editor.jsm");
       Components.utils.import("resource://gre/modules/NetUtil.jsm");
       Components.utils.import("resource://gre/modules/FileUtils.jsm");
       Components.utils.import("resource://gre/modules/Services.jsm");
-            
+
       // Watch for right clicks
+
+      document.getElementById("contentAreaContextMenu")
+              .addEventListener("popupshowing",
+                      sourceEditorExample.onPopup, false);
       
-	    document.getElementById("contentAreaContextMenu")
-	            .addEventListener("popupshowing",
-	                    sourceEditorExample.onPopup, false);
-	  }
+      // See if the content is editable and adjust menus accordingly
+      
+      var webDevItem = document.getElementById("edit-source-webdev-item");
+      var fxItem = document.getElementById("
+      
+      if (sourceEditorExample.getType(document.contentType)) {
+        webDevItem.disabled = false;
+        fxItem.disabled = false;
+      } else {
+        webDevItem.disabled = true;
+        fxItem.disabled = true;
+      }
+    }
   },
   
   // Called when the context menu is opened, to do menu item setup
   
   onPopup: function() {
-    var node = sourceEditorExample.getCurrentNode();   // The node that was right-clicked
+    var node = sourceEditorExample.getCurrentNode();
     var linkMenuItem = document.getElementById("edit-source_menuitem");
     var pageMenuItem = document.getElementById("edit-source_menuitem_thispage");
     
