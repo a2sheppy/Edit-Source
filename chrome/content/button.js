@@ -75,11 +75,10 @@ var sourceEditorExample = {
       pageMenuItem.hidden = true;
     }
     
-    // Hide the menu options if the link is not a supported type
+    // Hide the menu option if the content is not a supported type
     
     if (!sourceEditorExample.getType(url)) {
       menuItem.hidden = true;
-      // ADD CODE TO DO THE SAME TO THE WEB DEVELOPER MENU ITEM!
     }
   },
   
@@ -350,10 +349,10 @@ var sourceEditorExample = {
         inputStream.close();
       } catch(e) {
       }
-
+      
       var config = {
         showLineNumbers: true,
-        placeholderText: data,  // should be initialText in Firefox 13+
+        initialText: data,
         tabSize: 2,
         expandTab: true,
         mode: textMode
@@ -513,9 +512,10 @@ var sourceEditorExample = {
     var savePicker = Cc["@mozilla.org/filepicker;1"]
                        .createInstance(nsIFilePicker);
     var type = sourceEditorExample.getType(editWin.sourceEditorURL);
-        
-    savePicker.init(window, "Where would you like to save this file?",
-                    nsIFilePicker.modeSave);
+    
+    var pickerTitle = editWin.sourceEditor.stringsBundle
+                             .getString("savePickerTitle");
+    savePicker.init(window, pickerTitle, nsIFilePicker.modeSave);
     
     // Configure the picker
     

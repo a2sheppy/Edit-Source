@@ -6,14 +6,12 @@
   <Description
     about="urn:mozilla:install-manifest"
 
-    em:name="Source Editor Example"
-    em:description="Example of using the Source Editor API"
+    em:name="Edit Source"
+    em:description="A page source editor for Firefox."
     em:creator="Eric Shepherd"
 
-    em:id="source-editor@example.com"
-    em:version="1.0"
-
-    em:iconURL="chrome://source-editor/content/icon.png" >
+    em:id="edit-source@mozilla.com"
+    em:version="1.0" >
 
     <em:targetApplication><!-- Firefox -->
       <Description
