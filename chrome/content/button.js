@@ -56,7 +56,7 @@ var sourceEditorExample = {
       var webDevItem = document.getElementById("edit-source-webdev-item");
       var fxItem = document.getElementById("edit-source-appmenu-item");
       
-      if (sourceEditorExample.getType(document.contentType)) {
+      if (sourceEditorExample.getType(gBrowser.contentDocument.location.href)) {
         webDevItem.disabled = false;
         fxItem.disabled = false;
       } else {
@@ -566,7 +566,7 @@ var sourceEditorExample = {
   
   // Update the displayed page based on the text in the editor
   updatePage: function(editWin) {
-    var type = sourceEditorExample.getType(editWin.sourceEditorURL);
+    var type = editWin.sourceEditor.document.contentType;
     
     switch(type) {
       case "html":
