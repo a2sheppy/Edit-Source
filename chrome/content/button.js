@@ -133,7 +133,7 @@ var sourceEditorExample = {
     }
     
     if (src && src != "") {
-      sourceEditorExample.openUrl(document, src, what);
+      sourceEditorExample.openUrl(src, what);
     }
   },
   
@@ -202,7 +202,7 @@ var sourceEditorExample = {
   // document on which the click occurred is |document|. |what|
   // is either "page" or "link"; the latter will disable the
   // "Update Page" menu option.
-  openUrl: function(doc, src, what) {
+  openUrl: function(src, what) {
     var windowFeatures = "chrome,toolbar=no,resizable=yes,dialog=no," +
                          "width=600,height=400";
     
