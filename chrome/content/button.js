@@ -198,8 +198,7 @@ var sourceEditorExample = {
     }
   },
   
-  // Opens the specified URL in a new source editor window; the
-  // document on which the click occurred is |document|. |what|
+  // Opens the specified URL in a new source editor window; |what|
   // is either "page" or "link"; the latter will disable the
   // "Update Page" menu option.
   openUrl: function(src, what) {
