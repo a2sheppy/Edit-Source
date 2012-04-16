@@ -56,7 +56,8 @@ var sourceEditorExample = {
       var webDevItem = document.getElementById("edit-source-webdev-item");
       var fxItem = document.getElementById("edit-source-appmenu-item");
       
-      if (sourceEditorExample.getType(gBrowser.contentDocument.location.href)) {
+      if (sourceEditorExample.getExtensionForType(
+                gBrowser.contentDocument.contentType)) {
         webDevItem.disabled = false;
         fxItem.disabled = false;
       } else {
@@ -77,21 +78,23 @@ var sourceEditorExample = {
     
     if (!node) {
       linkMenuItem.hidden = true;
-      menuItem = pageMenuItem;
       url = gBrowser.contentDocument.location.href;
-      pageMenuItem.hidden = false;
-      return;
+      
+      if (sourceEditorExample.getExtensionForType(
+              gBrowser.contentDocument.contentType)) {
+        pageMenuItem.hidden = false;
+      } else {
+        pageMenuItem.hidden = true;
+      }
     } else {
-      linkMenuItem.hidden = false;
+      pageMenuItem.hidden = true;
       menuItem = linkMenuItem;
       url = sourceEditorExample.getTargetURL(node);
-      pageMenuItem.hidden = true;
-    }
-    
-    // Hide the menu option if the content is not a supported type
-    
-    if (!sourceEditorExample.getType(url)) {
-      menuItem.hidden = true;
+      if (sourceEditorExample.getType(url)) {
+        linkMenuItem.hidden = false;
+      } else {
+        linkMenuItem.hidden = true;
+      }
     }
   },
   
@@ -221,21 +224,9 @@ var sourceEditorExample = {
     sourceEditorExample.readFileIntoEditor(src, editWin);
   },
   
-  // Get the type of the specified URL given its MIME type;
-  // returns null for unsupported types. This restricts us
-  // down to supported types.
-  getType: function(src) {
-    // special case about:blank
-    
-    if (src.toLowerCase() == "about:blank") {
-      return "html";
-    }
-    var type = sourceEditorExample.getContentType(src);
-    
-    if (!type) {
-      return null;
-    }
-    
+  // Given a MIME type, return the extension we use for that type. Returns
+  // null if it's not a supported type.
+  getExtensionForType: function(type) {
     // Remove any stuff after the semicolon; we don't care
     
     var semiPos = type.indexOf(";");
@@ -273,6 +264,24 @@ var sourceEditorExample = {
     // Unsupported type
 
     return null;
+  },
+  
+  // Get the type of the specified URL given its MIME type;
+  // returns null for unsupported types. This restricts us
+  // down to supported types.
+  getType: function(src) {
+    // special case about:blank
+    
+    if (src.toLowerCase() == "about:blank") {
+      return "html";
+    }
+    var type = sourceEditorExample.getContentType(src);
+    
+    if (!type) {
+      return null;
+    }
+    
+    return sourceEditorExample.getExtensionForType(type);
   },
   
   // Return the MIME type for the specified url; returns
