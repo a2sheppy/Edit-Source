@@ -139,6 +139,8 @@ var sourceEditorExample = {
   
   // Event handler for edit window's load event
   onWindowLoad: function(editWin, src, what) {
+    editWin.removeEventListener("load", sourceEditorExample.onWindowLoad, false);
+
     editWin.sourceEditorURL = src;
     editWin.sourceEditor = editWin.arguments[0];
     
@@ -152,12 +154,16 @@ var sourceEditorExample = {
       mitem.setAttribute("disabled", "true");
     }
     
-    // Grab the string bundle element
-    editWin.sourceEditor.stringsBundle = editWin.document
-                                                .getElementById("editor-strings");
+    // Stash some data we need into the editor object and create
+    // the new editor.
     
-    editWin.removeEventListener("load", sourceEditorExample.onWindowLoad, false);
-    editWin.sourceEditor.addEditor(src, editWin);
+    editWin.sourceEditor.stringsBundle = editWin.document
+                                              .getElementById("editor-strings");
+    editWin.sourceEditorObj = new SourceEditor();
+    
+    // Load content into the editor
+    
+    editWin.sourceEditor.readFileIntoEditor(src, editWin);
   },
   
   // Handle closing the editor window
@@ -215,13 +221,6 @@ var sourceEditorExample = {
     editWin.addEventListener("close", function(evt) {
           sourceEditorExample.onWindowClose(evt, editWin);
       }, false);
-  },
-  
-  // Adds an editor to the specified window
-  
-  addEditor: function(src, editWin) {
-    editWin.sourceEditorObj = new SourceEditor();
-    sourceEditorExample.readFileIntoEditor(src, editWin);
   },
   
   // Given a MIME type, return the extension we use for that type. Returns
