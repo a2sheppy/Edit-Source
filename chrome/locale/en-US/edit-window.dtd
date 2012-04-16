@@ -1,8 +1,11 @@
 <!ENTITY editor_window_title "Loading Source Editor">
 
 <!ENTITY editor_accel_save "S">
+<!ENTITY editor_accesskey_close_page "C">
 <!ENTITY editor_accel_close "W">
+<!ENTITY editor_accesskey_update_page "U">
 <!ENTITY editor_accel_update_page "R">
+
 
 <!ENTITY editor_accel_file "F">
 <!ENTITY editor_accel_edit "E">
